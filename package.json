@@ -1,0 +1,69 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "php",
+  "title": "Switch PHP version with Homebrew",
+  "description": "Switch PHP version with Homebrew",
+  "icon": "icon.png",
+  "author": "David",
+  "owner": "woda",
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "php",
+      "title": "PHP",
+      "description": "Switch PHP version with Homebrew",
+      "mode": "view",
+      "preferences": [
+        {
+          "name": "7.4",
+          "required": false,
+          "title": "PHP 7.4",
+          "type": "checkbox",
+          "description": "PHP 7.4 installed?"
+        },
+        {
+          "name": "8.0",
+          "required": false,
+          "title": "PHP 8.0",
+          "type": "checkbox",
+          "description": "PHP 8.0 installed?"
+        },
+        {
+          "name": "8.1",
+          "required": false,
+          "title": "PHP 8.1",
+          "type": "checkbox",
+          "description": "PHP 8.1 installed?"
+        },
+        {
+          "name": "8.2",
+          "required": false,
+          "title": "PHP 8.2",
+          "type": "checkbox",
+          "description": "PHP 8.2 installed?"
+        }
+      ]
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.46.0",
+    "@raycast/utils": "^1.4.16"
+  },
+  "devDependencies": {
+    "@types/node": "18.8.3",
+    "@types/react": "18.0.9",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "prettier": "^2.5.1",
+    "typescript": "^4.4.3"
+  },
+  "scripts": {
+    "build": "ray build -e dist",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint",
+    "publish": "ray publish"
+  }
+}
