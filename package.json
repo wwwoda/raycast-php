@@ -1,7 +1,7 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
-  "name": "php",
-  "title": "PHP",
+  "name": "php-homebrew-switcher",
+  "title": "PHP Homebrew Switcher",
   "description": "Switch PHP version with Homebrew",
   "icon": "icon.png",
   "author": "David",
@@ -9,7 +9,7 @@
   "license": "MIT",
   "commands": [
     {
-      "name": "php",
+      "name": "index",
       "title": "PHP",
       "description": "Switch PHP version with Homebrew",
       "mode": "view"
