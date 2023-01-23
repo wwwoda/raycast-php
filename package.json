@@ -1,7 +1,7 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "php",
-  "title": "Switch PHP Version With Homebrew",
+  "title": "PHP",
   "description": "Switch PHP version with Homebrew",
   "icon": "icon.png",
   "author": "David",
