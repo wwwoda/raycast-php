@@ -1,7 +1,7 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "php",
-  "title": "Switch PHP version with Homebrew",
+  "title": "Switch PHP Version With Homebrew",
   "description": "Switch PHP version with Homebrew",
   "icon": "icon.png",
   "author": "David",
@@ -12,37 +12,7 @@
       "name": "php",
       "title": "PHP",
       "description": "Switch PHP version with Homebrew",
-      "mode": "view",
-      "preferences": [
-        {
-          "name": "7.4",
-          "required": false,
-          "title": "PHP 7.4",
-          "type": "checkbox",
-          "description": "PHP 7.4 installed?"
-        },
-        {
-          "name": "8.0",
-          "required": false,
-          "title": "PHP 8.0",
-          "type": "checkbox",
-          "description": "PHP 8.0 installed?"
-        },
-        {
-          "name": "8.1",
-          "required": false,
-          "title": "PHP 8.1",
-          "type": "checkbox",
-          "description": "PHP 8.1 installed?"
-        },
-        {
-          "name": "8.2",
-          "required": false,
-          "title": "PHP 8.2",
-          "type": "checkbox",
-          "description": "PHP 8.2 installed?"
-        }
-      ]
+      "mode": "view"
     }
   ],
   "dependencies": {
