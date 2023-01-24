@@ -60,16 +60,17 @@ export default function Command() {
   return (
     <Wrap>
       {packages
-        .filter((pkg) => !matchesVersion(pkg))
+        // .filter()
         .map((pkg) => (
           <List.Item
             key={pkg.packageName}
             title={pkg.simpleVersion}
+            subtitle={matchesVersion(pkg) ? 'Active' : ''} 
             actions={
               <ActionPanel>
                 <Action
                   title="Link"
-                  onAction={() => handleAction(pkg)}
+                  onAction={() => !matchesVersion(pkg) && handleAction(pkg)}
                 />
               </ActionPanel>
             }

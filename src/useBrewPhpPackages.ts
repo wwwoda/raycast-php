@@ -28,9 +28,9 @@ export default () => {
         }, [] as Package[])
         .sort((a, b) => {
             if (a.major === b.major) {
-                return a.minor - b.minor;
+                return b.minor - a.minor;
             }
-            return a.major - b.major;
+            return b.major - a.major;
         });
     setPackages(phpPackages);
     cache.set("phpPackages", JSON.stringify(phpPackages));
