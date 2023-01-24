@@ -6,5 +6,4 @@ export type Version = {
 
 export type Package = {
   packageName: string;
-  current: boolean;
 } & Version;

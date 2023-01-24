@@ -2,31 +2,38 @@ import util from "util";
 import child from "child_process";
 const exec = util.promisify(child.exec);
 import { Package } from "./types";
-import { handleError } from "./util";
+import { handleError, versionsMatch } from "./util";
+import getCurrentPhpVersion from "./getCurrentPhpVersion";
 
 type SuccessHandler = (pkg: Package) => void;
 
-export default async (pkg: Package, pkgs: Package[], onSuccess: SuccessHandler) => {
+export default async (linkPackage: Package, packages: Package[], onSuccess: SuccessHandler) => {
   const commands: string[] = [];
+  const currentPhpVersion = await getCurrentPhpVersion();
 
-  pkgs.forEach((upkg) => {
-    if (pkg.current) {
+  if (!currentPhpVersion) {
+    handleError(new Error("Could not get current PHP version"));
+    return;
+  }
+
+  packages.forEach((pkg) => {
+    if (versionsMatch(linkPackage, pkg)) {
       return;
     }
-    commands.push(`brew unlink ${upkg.packageName}`);
+    commands.push(`brew unlink ${pkg.packageName}`);
   });
 
-  commands.push(`brew link ${pkg.packageName}`);
+  commands.push(`brew link ${linkPackage.packageName}`);
 
   try {
     const { stderr } = await exec(commands.join(" && "));
 
     if (stderr) {
-      handleError(stderr, `Error linking PHP ${pkg.simpleVersion}`);
+      handleError(new Error(stderr), `Error linking PHP ${linkPackage.simpleVersion}`);
       return;
     }
 
-    onSuccess(pkg);
+    onSuccess(linkPackage);
   } catch (error) {
     console.error(error);
   }

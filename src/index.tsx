@@ -15,8 +15,8 @@ function Wrap({children}: {children: React.ReactNode}) {
 }
 
 export default function Command() {
-  const currentPhpVersion = useCurrentPhpVersion();
-  const {packages, isLoading} = useBrewPhpPackages(currentPhpVersion);  
+  const {version: currentPhpVersion, matchesVersion} = useCurrentPhpVersion();
+  const {packages, isLoading} = useBrewPhpPackages();
   const [linkingInProgress, setLinkingInProgress] = useState(false);
   const [linkedPackage, setLinkedPackage] = useState<Package | null>(null);
 
@@ -45,7 +45,7 @@ export default function Command() {
     />
   );
 
-  if (isLoading) {
+  if (isLoading || !currentPhpVersion) {
     return (<Wrap>{getEmptyView("Loading linkable PHP versions...")}</Wrap>)
   }
 
@@ -60,7 +60,7 @@ export default function Command() {
   return (
     <Wrap>
       {packages
-        .filter((v) => !v.current)
+        .filter((pkg) => !matchesVersion(pkg))
         .map((pkg) => (
           <List.Item
             key={pkg.packageName}

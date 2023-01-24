@@ -1,7 +1,7 @@
 import { useExec } from "@raycast/utils";
-import { useEffect, useState } from "react";
-import { Version } from "./types";
-import { phpVersionRegex, versionFromString } from "./util";
+import { useCallback, useEffect, useState } from "react";
+import { Package, Version } from "./types";
+import { phpVersionRegex, versionFromString, versionsMatch } from "./util";
 
 export default () => {
   const [version, setVersion] = useState<Version | null>(null);
@@ -21,9 +21,16 @@ export default () => {
     if (!version) {
       return undefined;
     }
-    
+
     setVersion(version);
   }, [isLoading, data]);
 
-  return version;
+  const matchesVersion = useCallback((obj: Version | Package) => {
+    if (!version) {
+      return false;
+    }
+    return versionsMatch(version, obj)
+  }, [version]);
+
+  return {version, matchesVersion} as const;
 }

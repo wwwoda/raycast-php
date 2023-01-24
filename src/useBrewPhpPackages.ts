@@ -1,14 +1,18 @@
+import { Cache } from "@raycast/api";
 import { useExec } from "@raycast/utils";
 import { useEffect, useState } from "react";
-import { Package, Version } from "./types";
+import { Package } from "./types";
 import { packageFromString, phpPackageRegex } from "./util";
 
-export default (currentPhpVersion: Version | null) => {
-  const [packages, setPackages] = useState<Package[]>([]);
+const cache = new Cache();
+const cached = cache.get("phpPackages");
+
+export default () => {
+  const [packages, setPackages] = useState<Package[]>(cached ? JSON.parse(cached) : []);
   const { isLoading, data } = useExec("/usr/local/bin/brew", ["list", "--versions"]);
 
   useEffect(() => {
-    if (isLoading || !data || !currentPhpVersion) {
+    if (isLoading || !data) {
       return undefined;
     }
 
@@ -16,7 +20,7 @@ export default (currentPhpVersion: Version | null) => {
         .split("\n")
         .filter((entry) => phpPackageRegex.test(entry))
         .reduce((acc, entry) => {
-            const version = packageFromString(entry, currentPhpVersion);
+            const version = packageFromString(entry);
             if (version) {
                 acc.push(version)
             }
@@ -29,7 +33,8 @@ export default (currentPhpVersion: Version | null) => {
             return a.major - b.major;
         });
     setPackages(phpPackages);
-  }, [isLoading, data, currentPhpVersion]);
+    cache.set("phpPackages", JSON.stringify(phpPackages));
+  }, [isLoading, data]);
 
-  return {packages, isLoading} as const;
+  return {packages, isLoading: !packages.length && isLoading} as const;
 }
