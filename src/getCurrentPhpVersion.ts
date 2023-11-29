@@ -5,9 +5,9 @@ import { phpVersionRegex, versionFromString } from "./util";
 
 export default async () => {
   try {
-    const { stdout, stderr } = await exec("php -v");
+    const { stdout, stderr } = await exec("/usr/local/bin/php -v");
 
-    if (stderr) {
+    if (!stdout && stderr) {
       return null;
     }
 

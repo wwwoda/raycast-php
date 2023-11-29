@@ -1,4 +1,4 @@
-import { Clipboard, Toast, showToast } from "@raycast/api";
+import { Toast, showToast } from "@raycast/api";
 import { Package, Version } from "./types";
 
 // Checks if brew package is any php version ("php *" or "php@*")
@@ -8,7 +8,7 @@ export const phpPackageRegex = new RegExp("^(php[\\s@])");
 export const versionRegex = new RegExp("^(?<major>\\d+)\\.?(?<minor>\\d+)?\\.?(?<patch>\\d+)?");
 
 // Extract php version from php -v output
-export const phpVersionRegex = new RegExp("^PHP (\\d+[^\\s]+)");
+export const phpVersionRegex = new RegExp("PHP (\\d+[^\\s]+)");
 
 export const handleError = async (error: Error, title = 'Something went wrong') => {
     return showToast({
