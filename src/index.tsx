@@ -1,7 +1,7 @@
 import { Action, ActionPanel, Toast, showToast, popToRoot, List } from "@raycast/api";
 import { useState } from "react";
 import useCurrentPhpVersion from "./useCurrentPhpVersion";
-import useBrewPhpPackages from "./useBrewPhpPackages";
+import useBrewPhpPackages, {cache} from "./useBrewPhpPackages";
 import { Package } from "./types";
 import linkPackage from "./linkPackage";
 import getCurrentPhpVersion from "./getCurrentPhpVersion";
@@ -65,12 +65,16 @@ export default function Command() {
           <List.Item
             key={pkg.packageName}
             title={pkg.simpleVersion}
-            subtitle={matchesVersion(pkg) ? 'Active' : ''} 
+            subtitle={matchesVersion(pkg) ? 'Active' : ''}
             actions={
               <ActionPanel>
                 <Action
                   title="Link"
                   onAction={() => !matchesVersion(pkg) && handleAction(pkg)}
+                />
+                <Action
+                  title="Clear PHP Version Cache"
+                  onAction={() => cache.clear()}
                 />
               </ActionPanel>
             }

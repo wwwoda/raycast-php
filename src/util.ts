@@ -19,9 +19,10 @@ export const handleError = async (error: Error, title = 'Something went wrong') 
 };
 
 export const packageFromString = (pkg: string) => {
-  const [packageName, packageVersion] = pkg.split(" ");
+  const [packageName, ...packageVersions] = pkg.split(" ");
+  const latestVersion = packageVersions[packageVersions.length - 1];
 
-  const version = versionFromString(packageVersion);
+  const version = versionFromString(latestVersion);
   if (!version) {
     return null;
   }

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Package } from "./types";
 import { packageFromString, phpPackageRegex } from "./util";
 
-const cache = new Cache();
+export const cache = new Cache();
 const cached = cache.get("phpPackages");
 
 export default () => {
@@ -32,7 +32,9 @@ export default () => {
             }
             return b.major - a.major;
         });
+
     setPackages(phpPackages);
+
     cache.set("phpPackages", JSON.stringify(phpPackages));
   }, [isLoading, data]);
 
