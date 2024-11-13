@@ -20,6 +20,8 @@ export default function Command() {
   const [linkingInProgress, setLinkingInProgress] = useState(false);
   const [linkedPackage, setLinkedPackage] = useState<Package | null>(null);
 
+  // console.log({currentPhpVersion, packages, isLoading, linkingInProgress, linkedPackage});
+
   const handleAction = (pkg: Package) => {
     showToast({
       title: `Linking PHP ${pkg.simpleVersion}`,

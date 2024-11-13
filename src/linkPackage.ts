@@ -16,14 +16,14 @@ export default async (linkPackage: Package, packages: Package[], onSuccess: Succ
     return;
   }
 
-  packages.forEach((pkg) => {
-    if (versionsMatch(linkPackage, pkg)) {
+  packages.forEach((pkg) => {    // console.log(pkg, versionsMatch(linkPackage, pkg));
+    if (!versionsMatch(currentPhpVersion, pkg)) {
       return;
     }
-    commands.push(`brew unlink ${pkg.packageName}`);
+    commands.push(`/opt/homebrew/bin/brew unlink ${pkg.packageName}`);
   });
 
-  commands.push(`brew link ${linkPackage.packageName}`);
+  commands.push(`/opt/homebrew/bin/brew link ${linkPackage.packageName}`);
 
   try {
     const { stderr } = await exec(commands.join(" && "));

@@ -5,8 +5,8 @@ import { phpVersionRegex, versionFromString, versionsMatch } from "./util";
 
 export default () => {
   const [version, setVersion] = useState<Version | null>(null);
-  const { isLoading, data } = useExec("/usr/local/bin/php", ["-v"]);
-
+  const { isLoading, data } = useExec("/opt/homebrew/bin/php", ["-v"]);
+  
   useEffect(() => {
     if (isLoading || !data) {
       return undefined;

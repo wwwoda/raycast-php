@@ -9,7 +9,7 @@ const cached = cache.get("phpPackages");
 
 export default () => {
   const [packages, setPackages] = useState<Package[]>(cached ? JSON.parse(cached) : []);
-  const { isLoading, data } = useExec("/usr/local/bin/brew", ["list", "--versions"]);
+  const { isLoading, data } = useExec("/opt/homebrew/bin/brew", ["list", "--versions"]);
 
   useEffect(() => {
     if (isLoading || !data) {
