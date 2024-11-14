@@ -2,10 +2,11 @@ import { useExec } from "@raycast/utils";
 import { useCallback, useEffect, useState } from "react";
 import { Package, Version } from "./types";
 import { phpVersionRegex, versionFromString, versionsMatch } from "./util";
+import {getPhpCommand} from "./commands";
 
 export default () => {
   const [version, setVersion] = useState<Version | null>(null);
-  const { isLoading, data } = useExec("/opt/homebrew/bin/php", ["-v"]);
+  const { isLoading, data } = useExec(getPhpCommand(), ["-v"]);
   
   useEffect(() => {
     if (isLoading || !data) {

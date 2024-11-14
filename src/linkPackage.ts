@@ -4,10 +4,12 @@ const exec = util.promisify(child.exec);
 import { Package } from "./types";
 import { handleError, versionsMatch } from "./util";
 import getCurrentPhpVersion from "./getCurrentPhpVersion";
+import {getBrewCommand} from "./commands";
 
 type SuccessHandler = (pkg: Package) => void;
 
 export default async (linkPackage: Package, packages: Package[], onSuccess: SuccessHandler) => {
+  const brewCommand = getBrewCommand();
   const commands: string[] = [];
   const currentPhpVersion = await getCurrentPhpVersion();
 
@@ -20,10 +22,10 @@ export default async (linkPackage: Package, packages: Package[], onSuccess: Succ
     if (!versionsMatch(currentPhpVersion, pkg)) {
       return;
     }
-    commands.push(`/opt/homebrew/bin/brew unlink ${pkg.packageName}`);
+    commands.push(`${brewCommand} unlink ${pkg.packageName}`);
   });
 
-  commands.push(`/opt/homebrew/bin/brew link ${linkPackage.packageName}`);
+  commands.push(`${brewCommand} link ${linkPackage.packageName}`);
 
   try {
     const { stderr } = await exec(commands.join(" && "));

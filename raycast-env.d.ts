@@ -14,7 +14,10 @@ declare type Preferences = ExtensionPreferences
 
 declare namespace Preferences {
   /** Preferences accessible in the `index` command */
-  export type Index = ExtensionPreferences & {}
+  export type Index = ExtensionPreferences & {
+  /** Brew Path - Get via command 'which brew' */
+  "brewPath": string
+}
 }
 
 declare namespace Arguments {

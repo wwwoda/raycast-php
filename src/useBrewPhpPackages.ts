@@ -3,13 +3,14 @@ import { useExec } from "@raycast/utils";
 import { useEffect, useState } from "react";
 import { Package } from "./types";
 import { packageFromString, phpPackageRegex } from "./util";
+import {getBrewCommand} from "./commands";
 
 export const cache = new Cache();
 const cached = cache.get("phpPackages");
 
 export default () => {
   const [packages, setPackages] = useState<Package[]>(cached ? JSON.parse(cached) : []);
-  const { isLoading, data } = useExec("/opt/homebrew/bin/brew", ["list", "--versions"]);
+  const { isLoading, data } = useExec(getBrewCommand(), ["list", "--versions"]);
 
   useEffect(() => {
     if (isLoading || !data) {

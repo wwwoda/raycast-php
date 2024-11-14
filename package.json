@@ -12,7 +12,17 @@
       "name": "index",
       "title": "PHP",
       "description": "Switch PHP version with Homebrew",
-      "mode": "view"
+      "mode": "view",
+      "preferences": [
+        {
+          "name": "brewPath",
+          "required": false,
+          "title": "Brew Path",
+          "type": "textfield",
+          "description": "Get via command 'which brew'",
+          "default": "/opt/homebrew/bin/brew"
+        }
+      ]
     }
   ],
   "dependencies": {
