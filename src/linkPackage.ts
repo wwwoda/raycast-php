@@ -4,7 +4,7 @@ const exec = util.promisify(child.exec);
 import { Package } from "./types";
 import { handleError, versionsMatch } from "./util";
 import getCurrentPhpVersion from "./getCurrentPhpVersion";
-import {getBrewCommand} from "./commands";
+import { getBrewCommand } from "./commands";
 
 type SuccessHandler = (pkg: Package) => void;
 
@@ -18,7 +18,8 @@ export default async (linkPackage: Package, packages: Package[], onSuccess: Succ
     return;
   }
 
-  packages.forEach((pkg) => {    // console.log(pkg, versionsMatch(linkPackage, pkg));
+  packages.forEach((pkg) => {
+    // console.log(pkg, versionsMatch(linkPackage, pkg));
     if (!versionsMatch(currentPhpVersion, pkg)) {
       return;
     }

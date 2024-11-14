@@ -10,12 +10,12 @@ export const versionRegex = new RegExp("^(?<major>\\d+)\\.?(?<minor>\\d+)?\\.?(?
 // Extract php version from php -v output
 export const phpVersionRegex = new RegExp("PHP (\\d+[^\\s]+)");
 
-export const handleError = async (error: Error, title = 'Something went wrong') => {
-    return showToast({
-        title,
-        message: error.message,
-        style: Toast.Style.Failure,
-    });
+export const handleError = async (error: Error, title = "Something went wrong") => {
+  return showToast({
+    title,
+    message: error.message,
+    style: Toast.Style.Failure,
+  });
 };
 
 export const packageFromString = (pkg: string) => {
@@ -31,7 +31,7 @@ export const packageFromString = (pkg: string) => {
     packageName,
     ...version,
   } as Package;
-}
+};
 
 export const versionFromString = (version: string): Version | null => {
   const versionArray = versionRegex.exec(version);
@@ -47,7 +47,7 @@ export const versionFromString = (version: string): Version | null => {
     major,
     minor,
   };
-}
+};
 
 export const versionsMatch = (v1: Version | Package, v2: Version | Package) =>
   v1.major === v2.major && v1.minor === v2.minor;
